@@ -1,0 +1,44 @@
+# Eclipse
+/.metadata
+/.classpath
+/.project
+/.settings/
+bin/
+target/
+*.log
+
+# Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.properties
+
+# OS generated
+.DS_Store
+Thumbs.db
+
+# IDE specific
+.idea/
+*.iml
+
+# Logs
+*.log
+
+# Compiled Java class files
+*.class
+
+# Package distribution
+*.jar
+*.war
+*.ear
+
+# Backup files
+*.bak
+*.swp
+
+# Other files
+*.tmp
+
+# Exclude personal config
+*.env
+.env.local
