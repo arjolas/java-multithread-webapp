@@ -2,8 +2,10 @@ package com.multithread.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import com.multithread.model.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable; 
 
 @Repository
 public interface EntityRepository extends JpaRepository<EntityModel, Long> {
-  // Puoi aggiungere query personalizzate se vuoi
+  Page<EntityModel> findAll(Pageable pageable);
 }

@@ -1,5 +1,8 @@
 package com.multithread.service;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Page;
+
 import jakarta.annotation.PreDestroy;
 import org.springframework.stereotype.Service;
 import com.multithread.repository.*;
@@ -39,15 +42,19 @@ public class ReportService {
     return report.toString();
   }
 
+
   private String processBlock(int blockId) {
-    // Esempio: leggi dal DB i record con id minore di blockId * 10
-    List<EntityModel> records = recordRepository.findAll().stream()
-      .filter(r -> r.getId() < blockId * 10)
-      .toList();
+    int blockSize = 10;
+    int pageNumber = blockId - 1; // Le pagine partono da 0
+
+    Page<EntityModel> page = recordRepository.findAll(PageRequest.of(pageNumber, blockSize));
+
+    List<EntityModel> records = page.getContent();
 
     int somma = records.stream().mapToInt(EntityModel::getValore).sum();
+    double media = records.isEmpty() ? 0.0 : (double) somma / records.size();
 
-    return String.format("Blocco %d - Somma valori: %d (da DB)", blockId, somma);
+    return String.format("Blocco %d - Somma: %d, Media: %.2f", blockId, somma, media);
   }
 
   @PreDestroy
